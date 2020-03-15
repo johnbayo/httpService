@@ -22,3 +22,16 @@ class Server(BaseHTTPRequestHandler):
         self.send_header('Content-type', 'text/html')
         self.end_headers()
     		
+
+    def do_GET(self):
+        self.parsed_path = urlparse(self.path)
+        self.query = parse_qs(self.parsed_path.query)
+        try:
+            if self.parsed_path.path == "/helloworld":
+                if not bool(self.query):
+                    self._set_response()
+                    message = bytes("Hello Stranger", 'UTF-8')
+                    self.wfile.write(message)
+                    return
+        except IOError:
+            self.send_error(404,'File Not Found: %s' % self.path)
