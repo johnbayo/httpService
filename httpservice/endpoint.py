@@ -1,7 +1,6 @@
 from http.server import HTTPServer, BaseHTTPRequestHandler
 from urllib.parse import urlparse, parse_qs
 import re
-import httpservice
 import json
 import logging
 import argparse, os, sys
