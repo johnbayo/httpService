@@ -23,6 +23,10 @@ class Server(BaseHTTPRequestHandler):
         self.end_headers()
     		
 
+    def camel_case_split(self, str):   
+        return re.findall(r'[A-Z](?:[a-z]+|[A-Z]*(?=[A-Z]|$))', str) 
+
+        
     def do_GET(self):
         self.parsed_path = urlparse(self.path)
         self.query = parse_qs(self.parsed_path.query)
@@ -33,5 +37,17 @@ class Server(BaseHTTPRequestHandler):
                     message = bytes("Hello Stranger", 'UTF-8')
                     self.wfile.write(message)
                     return
+                elif 'name' in self.query:
+                    self._set_response()
+                    partStr = self.query['name'][0]
+                    msg = self.camel_case_split(partStr)
+                    newMsg=' '.join(msg)
+                    message = bytes(newMsg, 'UTF-8')
+                    self.wfile.write(message)
+                    return
+                else:
+                    raise IOError
+            else:
+                raise IOError
         except IOError:
             self.send_error(404,'File Not Found: %s' % self.path)
