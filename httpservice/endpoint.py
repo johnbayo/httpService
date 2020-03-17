@@ -7,7 +7,7 @@ import logging
 import argparse, os, sys
 
 
-HOST_NAME = 'localhost'
+HOST_NAME = "" 
 
 #argparse library to check port, converted to function for testing purpose
 def parsePort(someArgs=None):
