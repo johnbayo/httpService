@@ -1,8 +1,11 @@
 # httpservice
+This repository contains the code for the httpservice challenge. It is deployed in my gitlab registry which is accessible publicly
 
 ## Requirements
 
 Tested with python version `3.5.2 linux/amd64`
+or
+Docker installed locally
 
 ## License
 
